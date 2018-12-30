@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B05F1AEF95A71413497B4CCBB444D86F"
+               BlueprintIdentifier = "0DDA1D918C24DB69E4C72BE9DE3760C4"
                BlueprintName = "tflite"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libtflite.a">

@@ -15,6 +15,7 @@ environment:
 dependencies:
   camera: ^0.2.6
   tflite: ^0.0.4
+  tts: ^1.0.2
   flutter:
     sdk: flutter
   path_provider: ^0.4.1

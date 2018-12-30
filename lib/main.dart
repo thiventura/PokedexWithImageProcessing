@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
+import 'package:tts/tts.dart';
 import 'dart:io';
 
 List<CameraDescription> cameras;
@@ -15,6 +16,7 @@ Future<void> main() async {
       model: "assets/model/pokemon25.tflite",
       labels: "assets/model/pokemon25.txt",
     );
+    await Tts.setLanguage('pt-BR');
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
@@ -216,6 +218,8 @@ class PokemonScreen extends StatelessWidget {
         )
       ],
     );
+
+    Tts.speak(pokemonDescription);
 
     return Scaffold(
       appBar: AppBar(

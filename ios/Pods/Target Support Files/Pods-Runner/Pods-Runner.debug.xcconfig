@@ -1,10 +1,10 @@
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../.symlinks/flutter/ios" "${PODS_ROOT}/TensorFlowLite/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) '${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers' "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Flutter" "${PODS_ROOT}/Headers/Public/TensorFlowLite" "${PODS_ROOT}/Headers/Public/camera" "${PODS_ROOT}/Headers/Public/path_provider" "${PODS_ROOT}/Headers/Public/tflite"
+HEADER_SEARCH_PATHS = $(inherited) '${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers' "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Flutter" "${PODS_ROOT}/Headers/Public/TensorFlowLite" "${PODS_ROOT}/Headers/Public/camera" "${PODS_ROOT}/Headers/Public/path_provider" "${PODS_ROOT}/Headers/Public/tflite" "${PODS_ROOT}/Headers/Public/tts"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/camera" "${PODS_CONFIGURATION_BUILD_DIR}/path_provider" "${PODS_CONFIGURATION_BUILD_DIR}/tflite"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Flutter" -isystem "${PODS_ROOT}/Headers/Public/TensorFlowLite" -isystem "${PODS_ROOT}/Headers/Public/camera" -isystem "${PODS_ROOT}/Headers/Public/path_provider" -isystem "${PODS_ROOT}/Headers/Public/tflite"
-OTHER_LDFLAGS = $(inherited) -L ${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework -ObjC -l"c++" -l"camera" -l"path_provider" -l"tflite" -framework "Accelerate" -framework "Flutter" -framework "tensorflow_lite" -force_load ${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework/tensorflow_lite
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/camera" "${PODS_CONFIGURATION_BUILD_DIR}/path_provider" "${PODS_CONFIGURATION_BUILD_DIR}/tflite" "${PODS_CONFIGURATION_BUILD_DIR}/tts"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Flutter" -isystem "${PODS_ROOT}/Headers/Public/TensorFlowLite" -isystem "${PODS_ROOT}/Headers/Public/camera" -isystem "${PODS_ROOT}/Headers/Public/path_provider" -isystem "${PODS_ROOT}/Headers/Public/tflite" -isystem "${PODS_ROOT}/Headers/Public/tts"
+OTHER_LDFLAGS = $(inherited) -L ${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework -ObjC -l"c++" -l"camera" -l"path_provider" -l"tflite" -l"tts" -framework "Accelerate" -framework "Flutter" -framework "tensorflow_lite" -force_load ${SRCROOT}/Pods/TensorFlowLite/Frameworks/tensorflow_lite.framework/tensorflow_lite
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

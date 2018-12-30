@@ -6,6 +6,7 @@
 #import <camera/CameraPlugin.h>
 #import <path_provider/PathProviderPlugin.h>
 #import <tflite/TflitePlugin.h>
+#import <tts/TtsPlugin.h>
 
 @implementation GeneratedPluginRegistrant
 
@@ -13,6 +14,7 @@
   [CameraPlugin registerWithRegistrar:[registry registrarForPlugin:@"CameraPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [TflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"TflitePlugin"]];
+  [TtsPlugin registerWithRegistrar:[registry registrarForPlugin:@"TtsPlugin"]];
 }
 
 @end

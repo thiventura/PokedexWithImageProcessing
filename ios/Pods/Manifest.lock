@@ -8,12 +8,15 @@ PODS:
   - tflite (0.0.4):
     - Flutter
     - TensorFlowLite
+  - tts (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - tflite (from `.symlinks/plugins/tflite/ios`)
+  - tts (from `.symlinks/plugins/tts/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -28,6 +31,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   tflite:
     :path: ".symlinks/plugins/tflite/ios"
+  tts:
+    :path: ".symlinks/plugins/tts/ios"
 
 SPEC CHECKSUMS:
   camera: be01db3b2193839f9af56a9db99b7fea444d35f3
@@ -35,6 +40,7 @@ SPEC CHECKSUMS:
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   TensorFlowLite: e81aef029750aa46b42ad16553fa4cddd81498cc
   tflite: 48c4951e38ea09fe4392adcd6b997f39324dfa55
+  tts: 0e88302ed5837ef69d173ad3c9c59ddaab91e946
 
 PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
 
