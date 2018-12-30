@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
@@ -17,19 +18,20 @@ Future<void> main() async {
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
-  runApp(Pokedex());
+  runApp(MaterialApp(
+    title: 'Pokedex',
+    home: Pokedex(),
+  ));
 }
 
 class Pokedex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Pokedex'),
-        ),
-        body: CameraScreen(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Câmera'),
       ),
+      body: CameraScreen(),
     );
   }
 }
@@ -176,25 +178,27 @@ class _CameraScreenState extends State<CameraScreen> {
     );
     print(recognitions);
 
+    String pokemonDetected = 'bulbasaur';
+    String pokemonDescription = await rootBundle.loadString('assets/pokemons/descricao/$pokemonDetected.txt');
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PokemonScreen(pokemon: 'chamander')),
+      MaterialPageRoute(builder: (context) => PokemonScreen(pokemon: pokemonDetected, pokemonDescription: pokemonDescription)),
     );
   }
 }
 
 class PokemonScreen extends StatelessWidget {
-  PokemonScreen({this.pokemon});
+  PokemonScreen({this.pokemon, this.pokemonDescription});
   final String pokemon;
+  final String pokemonDescription;
 
   @override
   Widget build(BuildContext context) {
     Widget textSection = Container(
       padding: const EdgeInsets.all(32.0),
       child: Text(
-        '''
-        Bulbasaur pode ser visto a dormir na luz do sol brilhante. Há uma semente nas costas. Ao absorver os raios do sol, a semente cresce progressivamente.
-        ''',
+        pokemonDescription,
         softWrap: true,
       ),
     );
@@ -207,26 +211,28 @@ class PokemonScreen extends StatelessWidget {
           icon: const Icon(Icons.camera_alt),
           color: Colors.red,
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CameraScreen()),
-            );
+            Navigator.pop(context);
           },
         )
       ],
     );
 
-    return ListView(
-      children: [
-        Image.asset(
-          'assets/pokemons/imagens/$pokemon.jpg',
-          width: 600.0,
-          height: 240.0,
-          fit: BoxFit.cover,
-        ),
-        textSection,
-        buttonSection,
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pokémon'),
+      ),
+      body: ListView(
+        children: [
+          Image.asset(
+            'assets/pokemons/imagens/$pokemon.jpg',
+            width: 600.0,
+            height: 240.0,
+            fit: BoxFit.cover,
+          ),
+          textSection,
+          buttonSection,
+        ],
+      ),
     );
   }
 }
