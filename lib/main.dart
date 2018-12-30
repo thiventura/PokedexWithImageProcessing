@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:tflite/tflite.dart';
+import 'dart:io';
 
 List<CameraDescription> cameras;
 
@@ -11,6 +10,10 @@ Future<void> main() async {
   // Fetch the available cameras before initializing the app.
   try {
     cameras = await availableCameras();
+    await Tflite.loadModel(
+      model: "assets/pokemon25.tflite",
+      labels: "assets/pokemon25.txt",
+    );
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
@@ -55,8 +58,9 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     controller?.dispose();
+    await Tflite.close();
     super.dispose();
   }
 
@@ -136,6 +140,7 @@ class _CameraScreenState extends State<CameraScreen> {
       print('Error: select a camera first.');
       return null;
     }
+    
     final Directory extDir = await getApplicationDocumentsDirectory();
     final String dirPath = '${extDir.path}/Pictures/pokedex';
     await Directory(dirPath).create(recursive: true);
@@ -143,10 +148,12 @@ class _CameraScreenState extends State<CameraScreen> {
 
     if (controller.value.isTakingPicture) {
       // A capture is already pending, do nothing.
+      print('Wait a second to take another picture');
       return null;
     }
 
     try {
+      print('Taking a picture');
       await controller.takePicture(filePath);
     } on CameraException catch (e) {
       print(e);
@@ -156,7 +163,17 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> detectPokemon() async {
-    // TODO
     print(imagePath);
+    var recognitions = await Tflite.runModelOnImage(
+      path: imagePath,
+      inputSize: 299,
+      numChannels: 3,
+      imageMean: 128.0,
+      imageStd: 128.0,
+      numResults: 5,
+      threshold: 0.1,
+      numThreads: 1,
+    );
+    print(recognitions);
   }
 }
