@@ -11,8 +11,8 @@ Future<void> main() async {
   try {
     cameras = await availableCameras();
     await Tflite.loadModel(
-      model: "assets/pokemon25.tflite",
-      labels: "assets/pokemon25.txt",
+      model: "assets/model/pokemon25.tflite",
+      labels: "assets/model/pokemon25.txt",
     );
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
@@ -219,7 +219,7 @@ class PokemonScreen extends StatelessWidget {
     return ListView(
       children: [
         Image.asset(
-          'assets/pokemons/$pokemon.jpg',
+          'assets/pokemons/imagens/$pokemon.jpg',
           width: 600.0,
           height: 240.0,
           fit: BoxFit.cover,
