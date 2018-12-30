@@ -1,0 +1,33 @@
+{
+  "name": "tflite",
+  "version": "0.0.4",
+  "summary": "A Flutter plugin for accessing TensorFlow Lite.",
+  "description": "A Flutter plugin for accessing TensorFlow Lite. Supports both iOS and Android.",
+  "homepage": "https://github.com/shaqian/flutter_tflite",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Qian Sha": "https://github.com/shaqian"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
+  "dependencies": {
+    "Flutter": [
+
+    ],
+    "TensorFlowLite": [
+
+    ]
+  },
+  "xcconfig": {
+    "USER_HEADER_SEARCH_PATHS": "$(inherited) \"${PODS_ROOT}/Headers/Private\" \"${PODS_ROOT}/Headers/Private/tflite\" \"${PODS_ROOT}/Headers/Public\" \"${PODS_ROOT}/Headers/Public/Flutter\" \"${PODS_ROOT}/Headers/Public/TensorFlowLite/tensorflow_lite\" \"${PODS_ROOT}/Headers/Public/tflite\" \"${PODS_ROOT}/TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers\""
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "static_framework": true
+}
