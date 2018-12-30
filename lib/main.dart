@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+
+
 List<CameraDescription> cameras;
 
 Future<void> main() async {
@@ -8,7 +12,7 @@ Future<void> main() async {
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
-    print('Error: $e.code\nError Message: $e.description');
+    print('Error: ${e.code}\nError Message: ${e.description}');
   }
   runApp(Pokedex());
 }
@@ -17,7 +21,6 @@ class Pokedex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
       home: Scaffold(
         appBar: AppBar(
           title: Text('Pokedex'),
@@ -38,8 +41,6 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   CameraController controller;
   String imagePath;
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -105,7 +106,7 @@ class _CameraScreenState extends State<CameraScreen> {
       children: <Widget>[
         IconButton(
           icon: const Icon(Icons.camera_alt),
-          color: Colors.blue,
+          color: Colors.red,
           onPressed: controller != null &&
                   controller.value.isInitialized 
               ? onTakePictureButtonPressed
@@ -116,6 +117,46 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   void onTakePictureButtonPressed() {
+    takePicture().then((String filePath) {
+      if (mounted) {
+        setState(() {
+          imagePath = filePath;
+        });
+        if (filePath != null) {
+          detectPokemon().then((_) { 
+            
+          });
+        } 
+      }
+    });
+  }
+
+  Future<String> takePicture() async {
+    if (!controller.value.isInitialized) {
+      print('Error: select a camera first.');
+      return null;
+    }
+    final Directory extDir = await getApplicationDocumentsDirectory();
+    final String dirPath = '${extDir.path}/Pictures/pokedex';
+    await Directory(dirPath).create(recursive: true);
+    final String filePath = '$dirPath/capture.jpg';
+
+    if (controller.value.isTakingPicture) {
+      // A capture is already pending, do nothing.
+      return null;
+    }
+
+    try {
+      await controller.takePicture(filePath);
+    } on CameraException catch (e) {
+      print(e);
+      return null;
+    }
+    return filePath;
+  }
+
+  Future<void> detectPokemon() async {
     // TODO
+    print(imagePath);
   }
 }
