@@ -175,5 +175,58 @@ class _CameraScreenState extends State<CameraScreen> {
       numThreads: 1,
     );
     print(recognitions);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PokemonScreen(pokemon: 'chamander')),
+    );
+  }
+}
+
+class PokemonScreen extends StatelessWidget {
+  PokemonScreen({this.pokemon});
+  final String pokemon;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget textSection = Container(
+      padding: const EdgeInsets.all(32.0),
+      child: Text(
+        '''
+        Bulbasaur pode ser visto a dormir na luz do sol brilhante. Há uma semente nas costas. Ao absorver os raios do sol, a semente cresce progressivamente.
+        ''',
+        softWrap: true,
+      ),
+    );
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.camera_alt),
+          color: Colors.red,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CameraScreen()),
+            );
+          },
+        )
+      ],
+    );
+
+    return ListView(
+      children: [
+        Image.asset(
+          'assets/pokemons/$pokemon.jpg',
+          width: 600.0,
+          height: 240.0,
+          fit: BoxFit.cover,
+        ),
+        textSection,
+        buttonSection,
+      ],
+    );
   }
 }
