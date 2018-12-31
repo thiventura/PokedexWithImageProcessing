@@ -14,8 +14,8 @@ Future<void> main() async {
   try {
     cameras = await availableCameras();
     await Tflite.loadModel(
-      model: "assets/model/pokemon25.tflite",
-      labels: "assets/model/pokemon25.txt",
+      model: "assets/model/pokedex_91.tflite",
+      labels: "assets/model/pokemon151.txt",
     );
     await Tts.setLanguage('pt-BR');
     loadPokemonList();
@@ -214,7 +214,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller = CameraController(cameras[0], ResolutionPreset.high);
     controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -333,7 +333,7 @@ class _CameraScreenState extends State<CameraScreen> {
     print(imagePath);
     var recognitions = await Tflite.runModelOnImage(
       path: imagePath,
-      inputSize: 299,
+      inputSize: 224,
       numChannels: 3,
       imageMean: 128.0,
       imageStd: 128.0,
@@ -342,7 +342,13 @@ class _CameraScreenState extends State<CameraScreen> {
       numThreads: 1,
     );
     print(recognitions);
-    final recognition = recognitions[0];
+    var recognition;
+    for (final r in recognitions) {
+      if (r['confidence'] > 1.0) 
+        continue;
+      recognition = r;
+      break;
+    }
 
     final String pokemonName = recognition["label"];
     final String pokemonNumber = pokemons[pokemonName];
