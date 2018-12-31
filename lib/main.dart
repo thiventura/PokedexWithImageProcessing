@@ -22,10 +22,13 @@ Future<void> main() async {
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
-  runApp(MaterialApp(
-    title: 'Pokedex',
-    home: Pokedex(),
-  ));
+  runApp(
+    MaterialApp(
+      title: 'Pokedex',
+      debugShowCheckedModeBanner: false,
+      home: Pokedex(),
+    )
+  );
 }
 
 void loadPokemonList() {
@@ -189,7 +192,8 @@ class Pokedex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Câmera'),
+        title: Text('Pokedex'),
+        backgroundColor: Colors.red,
       ),
       body: CameraScreen(),
     );
@@ -263,17 +267,21 @@ class _CameraScreenState extends State<CameraScreen> {
 
   /// Display the control bar with buttons to take pictures.
   Widget _captureControlRowWidget() {
+    final size = 100.0;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.camera_alt),
-          color: Colors.red,
-          onPressed: controller != null &&
-                  controller.value.isInitialized 
-              ? onTakePictureButtonPressed
-              : null,
+        SizedBox(
+          height: size,
+          width: size,
+          child: new IconButton(
+              padding: new EdgeInsets.all(0.0),
+              color: Colors.red,
+              icon: new Icon(Icons.camera_alt, size: size),
+              onPressed: controller != null && controller.value.isInitialized 
+                ? onTakePictureButtonPressed : null,
+          )
         )
       ],
     );
@@ -363,16 +371,22 @@ class PokemonScreen extends StatelessWidget {
       ),
     );
 
+    final sizeIcon = 100.0;
     Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.camera_alt),
-          color: Colors.red,
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        SizedBox(
+          height: sizeIcon,
+          width: sizeIcon,
+          child: IconButton(
+            padding: new EdgeInsets.all(0.0),
+            icon: new Icon(Icons.camera_alt, size: sizeIcon),
+            color: Colors.red,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         )
       ],
     );
@@ -383,6 +397,8 @@ class PokemonScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(pokemonName),
+        backgroundColor: Colors.red,
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: [
