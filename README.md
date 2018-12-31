@@ -7,15 +7,14 @@ It was used Flutter for the app development and a Tensorflow model for image cla
 
 
 ### Screenshots
-<img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotcamera.png" width="250">
-<img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotpokemon.png" width="250">
+<img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotcamera.png" width="250"> <img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotpokemon.png" width="250">
 
 
 ### Plugins
 To load Tensorflow model and perform image recognition was used the [Tflite](https://pub.dartlang.org/packages/tflite) plugin. [Camera](https://pub.dartlang.org/packages/camera) plugin was used to access camera, display preview and capture snapshots. [TTS](https://pub.dartlang.org/packages/tts) plugin was used to perform Text to Speach with the pokémon's description.
 
 
-## Acknowledgements
+### Acknowledgements
 [Christopher Betz](https://github.com/cbetz/flutter-vision)
 
 [Harshit Dwivedi](https://heartbeat.fritz.ai/building-pok%C3%A9dex-in-android-using-tensorflow-lite-and-firebase-cc780848395)
