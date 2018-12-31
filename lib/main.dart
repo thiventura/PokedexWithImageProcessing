@@ -7,6 +7,7 @@ import 'package:tts/tts.dart';
 import 'dart:io';
 
 List<CameraDescription> cameras;
+var pokemons;
 
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.
@@ -17,6 +18,7 @@ Future<void> main() async {
       labels: "assets/model/pokemon25.txt",
     );
     await Tts.setLanguage('pt-BR');
+    loadPokemonList();
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
@@ -24,6 +26,162 @@ Future<void> main() async {
     title: 'Pokedex',
     home: Pokedex(),
   ));
+}
+
+void loadPokemonList() {
+  pokemons = {
+    'bulbasaur':'001',
+    'ivysaur':'002',
+    'venusaur':'003',
+    'charmander':'004',
+    'charmeleon':'005',
+    'charizard':'006',
+    'squirtle':'007',
+    'wartortle':'008',
+    'blastoise':'009',
+    'caterpie':'010',
+    'metapod':'011',
+    'butterfree':'012',
+    'weedle':'013',
+    'kakuna':'014',
+    'beedrill':'015',
+    'pidgey':'016',
+    'pidgeotto':'017',
+    'pidgeot':'018',
+    'rattata':'019',
+    'raticate':'020',
+    'spearow':'021',
+    'fearow':'022',
+    'ekans':'023',
+    'arbok':'024',
+    'pikachu':'025',
+    'raichu':'026',
+    'sandshrew':'027',
+    'sandslash':'028',
+    'nidoran-f':'029',
+    'nidorina':'030',
+    'nidoqueen':'031',
+    'nidoran-m':'032',
+    'nidorino':'033',
+    'nidoking':'034',
+    'clefairy':'035',
+    'clefable':'036',
+    'vulpix':'037',
+    'ninetales':'038',
+    'jigglypuff':'039',
+    'wigglytuff':'040',
+    'zubat':'041',
+    'golbat':'042',
+    'oddish':'043',
+    'gloom':'044',
+    'vileplume':'045',
+    'paras':'046',
+    'parasect':'047',
+    'venonat':'048',
+    'venomoth':'049',
+    'diglett':'050',
+    'dugtrio':'051',
+    'meowth':'052',
+    'persian':'053',
+    'psyduck':'054',
+    'golduck':'055',
+    'mankey':'056',
+    'primeape':'057',
+    'growlithe':'058',
+    'arcanine':'059',
+    'poliwag':'060',
+    'poliwhirl':'061',
+    'poliwrath':'062',
+    'abra':'063',
+    'kadabra':'064',
+    'alakazam':'065',
+    'machop':'066',
+    'machoke':'067',
+    'machamp':'068',
+    'bellsprout':'069',
+    'weepinbell':'070',
+    'victreebel':'071',
+    'tentacool':'072',
+    'tentacruel':'073',
+    'geodude':'074',
+    'graveler':'075',
+    'golem':'076',
+    'ponyta':'077',
+    'rapidash':'078',
+    'slowpoke':'079',
+    'slowbro':'080',
+    'magnemite':'081',
+    'magneton':'082',
+    'farfetchd':'083',
+    'doduo':'084',
+    'dodrio':'085',
+    'seel':'086',
+    'dewgong':'087',
+    'grimer':'088',
+    'muk':'089',
+    'shellder':'090',
+    'cloyster':'091',
+    'gastly':'092',
+    'haunter':'093',
+    'gengar':'094',
+    'onix':'095',
+    'drowzee':'096',
+    'hypno':'097',
+    'krabby':'098',
+    'kingler':'099',
+    'voltorb':'100',
+    'electrode':'101',
+    'exeggcute':'102',
+    'exeggutor':'103',
+    'cubone':'104',
+    'marowak':'105',
+    'hitmonlee':'106',
+    'hitmonchan':'107',
+    'lickitung':'108',
+    'koffing':'109',
+    'weezing':'110',
+    'rhyhorn':'111',
+    'rhydon':'112',
+    'chansey':'113',
+    'tangela':'114',
+    'kangaskhan':'115',
+    'horsea':'116',
+    'seadra':'117',
+    'goldeen':'118',
+    'seaking':'119',
+    'staryu':'120',
+    'starmie':'121',
+    'mr-mime':'122',
+    'scyther':'123',
+    'jynx':'124',
+    'electabuzz':'125',
+    'magmar':'126',
+    'pinsir':'127',
+    'tauros':'128',
+    'magikarp':'129',
+    'gyarados':'130',
+    'lapras':'131',
+    'ditto':'132',
+    'eevee':'133',
+    'vaporeon':'134',
+    'jolteon':'135',
+    'flareon':'136',
+    'porygon':'137',
+    'omanyte':'138',
+    'omastar':'139',
+    'kabuto':'140',
+    'kabutops':'141',
+    'aerodactyl':'142',
+    'snorlax':'143',
+    'articuno':'144',
+    'zapdos':'145',
+    'moltres':'146',
+    'dratini':'147',
+    'dragonair':'148',
+    'dragonite':'149',
+    'mewtwo':'150',
+    'mew':'151'
+  };
 }
 
 class Pokedex extends StatelessWidget {
@@ -179,8 +337,9 @@ class _CameraScreenState extends State<CameraScreen> {
       numThreads: 1,
     );
     print(recognitions);
+    final recognition = recognitions[0];
 
-    String pokemonDetected = 'bulbasaur';
+    String pokemonDetected = pokemons[recognition["label"]];
     String pokemonDescription = await rootBundle.loadString('assets/pokemons/descricao/$pokemonDetected.txt');
 
     Navigator.push(
@@ -228,7 +387,7 @@ class PokemonScreen extends StatelessWidget {
       body: ListView(
         children: [
           Image.asset(
-            'assets/pokemons/imagens/$pokemon.jpg',
+            'assets/pokemons/imagens/$pokemon.png',
             width: 600.0,
             height: 240.0,
             fit: BoxFit.cover,
