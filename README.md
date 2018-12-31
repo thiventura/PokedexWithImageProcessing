@@ -7,9 +7,8 @@ It was used Flutter for the app development and a Tensorflow model for image cla
 
 
 ### Screenshots
-![Screenshot of Camera Screen](https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotcamera.png)
-
-![Screenshot of Pokemon Screen](https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotpokemon.png)
+<img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotcamera.png" width="250">
+<img src="https://github.com/thiventura/PokedexWithImageProcessing/blob/master/docs/screenshotpokemon.png" width="250">
 
 
 ### Plugins
