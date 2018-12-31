@@ -298,9 +298,7 @@ class _CameraScreenState extends State<CameraScreen> {
           imagePath = filePath;
         });
         if (filePath != null) {
-          detectPokemon().then((_) { 
-            
-          });
+          detectPokemon().then((_) {});
         } 
       }
     });
@@ -334,7 +332,6 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   Future<void> detectPokemon() async {
-    print(imagePath);
     var recognitions = await Tflite.runModelOnImage(
       path: imagePath,
       inputSize: 224,
@@ -347,10 +344,9 @@ class _CameraScreenState extends State<CameraScreen> {
     );
     print(recognitions);
     var recognition;
-    for (final r in recognitions) {
-      if (r['confidence'] > 1.0) 
+    for (recognition in recognitions) {
+      if (recognition['confidence'] > 1.0) 
         continue;
-      recognition = r;
       break;
     }
 
