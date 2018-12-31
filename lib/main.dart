@@ -380,6 +380,7 @@ class PokemonScreen extends StatelessWidget {
       ],
     );
 
+    Tts.speak(pokemonName);
     Tts.speak(pokemonDescription);
 
     return Scaffold(
