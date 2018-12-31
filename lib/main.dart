@@ -12,13 +12,13 @@ var pokemons;
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.
   try {
-    cameras = await availableCameras();
     await Tflite.loadModel(
       model: "assets/model/pokedex_91.tflite",
       labels: "assets/model/pokemon151.txt",
     );
     await Tts.setLanguage('pt-BR');
     loadPokemonList();
+    cameras = await availableCameras();
   } on CameraException catch (e) {
     print('Error: ${e.code}\nError Message: ${e.description}');
   }
