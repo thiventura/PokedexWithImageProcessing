@@ -393,7 +393,7 @@ class PokemonScreen extends StatelessWidget {
             'assets/pokemons/imagens/$pokemonNumber.png',
             width: 600.0,
             height: 240.0,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
           textSection,
           buttonSection,
