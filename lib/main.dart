@@ -339,19 +339,21 @@ class _CameraScreenState extends State<CameraScreen> {
     print(recognitions);
     final recognition = recognitions[0];
 
-    String pokemonDetected = pokemons[recognition["label"]];
-    String pokemonDescription = await rootBundle.loadString('assets/pokemons/descricao/$pokemonDetected.txt');
+    final String pokemonName = recognition["label"];
+    final String pokemonNumber = pokemons[pokemonName];
+    final String pokemonDescription = await rootBundle.loadString('assets/pokemons/descricao/$pokemonNumber.txt');
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PokemonScreen(pokemon: pokemonDetected, pokemonDescription: pokemonDescription)),
+      MaterialPageRoute(builder: (context) => PokemonScreen(pokemonName: pokemonName, pokemonNumber: pokemonNumber, pokemonDescription: pokemonDescription)),
     );
   }
 }
 
 class PokemonScreen extends StatelessWidget {
-  PokemonScreen({this.pokemon, this.pokemonDescription});
-  final String pokemon;
+  PokemonScreen({this.pokemonName, this.pokemonNumber, this.pokemonDescription});
+  final String pokemonName;
+  final String pokemonNumber;
   final String pokemonDescription;
 
   @override
@@ -382,12 +384,12 @@ class PokemonScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pokémon'),
+        title: Text(pokemonName),
       ),
       body: ListView(
         children: [
           Image.asset(
-            'assets/pokemons/imagens/$pokemon.png',
+            'assets/pokemons/imagens/$pokemonNumber.png',
             width: 600.0,
             height: 240.0,
             fit: BoxFit.cover,
