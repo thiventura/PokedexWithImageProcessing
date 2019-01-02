@@ -315,6 +315,13 @@ class _CameraScreenState extends State<CameraScreen> {
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath/capture.jpg';
 
+    // Check if file already exist
+    final previousImage = File(filePath);
+    if (previousImage.existsSync()) {
+      print ('arquivo existe');
+      previousImage.delete();
+    }
+
     if (controller.value.isTakingPicture) {
       // A capture is already pending, do nothing.
       print('Wait a second to take another picture');
