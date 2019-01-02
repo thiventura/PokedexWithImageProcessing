@@ -318,7 +318,7 @@ class _CameraScreenState extends State<CameraScreen> {
     // Check if file already exist
     final previousImage = File(filePath);
     if (previousImage.existsSync()) {
-      print ('arquivo existe');
+      // if exist, delete it
       previousImage.delete();
     }
 
