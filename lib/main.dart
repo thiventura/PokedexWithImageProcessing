@@ -13,8 +13,8 @@ Future<void> main() async {
   // Fetch the available cameras before initializing the app.
   try {
     await Tflite.loadModel(
-      model: "assets/model/pokedex_91.tflite",
-      labels: "assets/model/pokemon151.txt",
+      model: "assets/model/pokemon151CartoonToy3dv2.lite",
+      labels: "assets/model/pokemon151CartoonToy3d.txt",
     );
     await Tts.setLanguage('pt-BR');
     loadPokemonList();
@@ -187,7 +187,12 @@ void loadPokemonList() {
     'dragonair':'148',
     'dragonite':'149',
     'mewtwo':'150',
-    'mew':'151'
+    'mew':'151',
+    'solgaleo':'152',
+    'lunala':'153',
+    'greninja':'154',
+    'chesnaught':'155',
+    'necrozma':'156',
   };
 }
 
@@ -343,21 +348,21 @@ class _CameraScreenState extends State<CameraScreen> {
       path: imagePath,
       inputSize: 224,
       numChannels: 3,
-      imageMean: 128.0,
-      imageStd: 128.0,
+      imageMean: 128,
+      imageStd: 128,
       numResults: 5,
-      threshold: 0.1,
+      threshold: 0.0,
       numThreads: 1,
     );
     print(recognitions);
     var recognition;
     for (recognition in recognitions) {
-      if (recognition['confidence'] > 1.0) 
+      if (recognition['index'] == 458) 
         continue;
       break;
     }
 
-    final String pokemonName = recognition["label"];
+    final String pokemonName = recognition["label"].split(" ")[0];
     final String pokemonNumber = pokemons[pokemonName];
     final String pokemonDescription = await rootBundle.loadString('assets/pokemons/descricao/$pokemonNumber.txt');
 
